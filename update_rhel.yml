@@ -13,6 +13,7 @@
         state: latest
         exclude: "{{ excluded_packages | join(',') }}"
       become: true
+      become_user: root
 
     - name: Check if a reboot is required
       stat:
@@ -20,6 +21,7 @@
       register: reboot_required
       changed_when: false
       become: true
+      become_user: root
 
     - name: Set reboot_required fact if needed
       set_fact:
@@ -32,3 +34,4 @@
         content: "reboot needed"
       when: reboot_needed | default(false)
       become: true
+      become_user: root

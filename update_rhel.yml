@@ -2,16 +2,11 @@
 - name: Red Hat Enterprise Linux 9.4 patch updates
   hosts: servers
   become: true
-  vars:
-    excluded_packages:
-      - kernel*
-      - kmod*
   tasks:
     - name: Update all packages except excluded ones
       dnf:
         name: "*"
         state: latest
-        exclude: "{{ excluded_packages | join(',') }}"
       become: true
       become_user: root
 
